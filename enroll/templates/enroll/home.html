@@ -1,0 +1,112 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'enroll/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{%static 'enroll/css/style.css' %}">
+ 
+
+    <title>Django ajax CRUD</title>
+</head>
+<body>
+    <div  class="container" style="margin: 10px;" >
+        
+        <h2> Django Functions based view Ajax Bootstrap 5 CRUD Project</h2>
+          <div class="row" >
+
+            <div class="col-md-2 col-lg-6  " style="background-color: #b7c7c6;  height:fit-content; padding-bottom: 10px; border-radius: 50px; margin-top: 75px;border-color: rgb(0, 0, 0);">
+                
+                     <h4 style="border-radius: 50px; border:black; color: black;background-color: aquamarine; padding: 15px; text-align: center;" class="border-right"> ADD/UPDATE STUDENT </h4>
+                     <form action="" method="post" >
+                        {% csrf_token %}
+                        <input type="hidden" name="userid" id="userid">
+                         <!-- {{form.as_p}} -->
+                        <div class="form-group"  style="color: rgb(206, 15, 31);" >
+                          <label for="{{ form.name.id_for_label }}" style="border-color: aquamarine; border-width: 30px;" >Name:</label>
+                          {{ form.name }}
+                      </div>
+                      
+                      <div class="form-group" style="color:rgb(206, 15, 31);" >
+                          <label for="{{ form.email.id_for_label }}">Email:</label>
+                          {{ form.email }}
+                      </div>
+                      
+                      <div class="form-group" style="color:rgb(206, 15, 31);">
+                        
+                          <label for="{{ form.password.id_for_label }}">Password:</label>
+                          {{ form.password }}
+                      </div>
+                      
+
+                        <input  type="button" id="btnsave" value="save" style="margin-top: 20px;margin-left: 25px;
+                        width: 500px;    background-color: aqua; " >
+                       
+                        
+                    </form>
+
+            </div>
+
+            <div class="col-md-5 col-lg-6" >
+                <h4 style="border-radius: 50px;  border: dashed; color: black;background-color: aquamarine; text-align: center; padding:15px"> Display Student information </h4>
+                <table class="table table-active" style="--bs-table-color-state: #feffff;
+                --bs-table-bg-state: rgb(72 72 72 / 97%);" > 
+                   <thead>
+                  <tr>
+                    <th scope="col">ID </th>
+                    <th scope="col">NAME </th>
+                    <th scope="col">EMAIL </th>
+                    <th scope="col">PASSWORD </th>
+                    <th scope="col" colspan=2>ACTION </th>
+                  </tr>
+
+                   </thead>
+                   <tbody id="tbody">
+                    {% for st in user %} 
+                     <tr >
+                        
+                        <td>{{st.id}}</td>
+                        <td>{{st.name }}</td>
+                        <td>{{st.email}}</td>
+                        <td>{{st.password}}</td>
+                        <td>
+                            <input class="btn-edi" type="button" data-sid="{{st.id}}" value="Edit" style="background-color:aquamarine;">
+                        </td>  
+                        <td>
+                                <input type="button" data-sid="{{st.id}}" value="Delete" 
+                                class="btn-del"
+                                style="background-color:red">
+                        </td>
+
+                     </tr>
+
+                    {% endfor %}
+
+
+                   </tbody>
+
+                </table>
+                
+
+            </div>
+          </div>  
+
+
+
+
+       
+    </div>
+    
+    <script src="{% static 'enroll/js/jquery.js'%}"></script>
+    <script src="{% static 'enroll/js/popper.js' %}"></script>
+
+    <script src="{% static 'enroll/js/bootstrap.js' %}"></script>
+    
+    {% include 'enroll/ajax.html' %}
+    
+
+    
+</body>
+</html>
